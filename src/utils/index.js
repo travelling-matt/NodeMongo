@@ -31,10 +31,11 @@ exports.updateMovie = async (collection, dataObj) => {
     }
 };
 
-//delete a record
+//delete a record and output remaining records to console
 exports.deleteMovie = async (collection, dataObj) => {
     try{
-        await collection.deleteOne({'title': dataObj.title})
+        await collection.deleteOne({'title': dataObj.title});
+        console.log(`${dataObj.title} deleted`);
         const listAll = await collection.find().toArray();
         console.log(listAll);
     } catch (error){
