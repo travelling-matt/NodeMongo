@@ -43,6 +43,25 @@ exports.deleteMovie = async (collection, dataObj) => {
     }
 };
 
+//search
+exports.search = async (collection, dataObj) => {
+    try{
+        const result = await collection.find({'title': dataObj}).toArray();
+        console.log(result)
+        //await collection.find({'title': dataObj.title}).toArray(result);
+        // const result =[];
+        // const searchTitle = {title: dataObj};
+        // await collection.find(searchTitle).toArray(result);
+        // console.log(result);
+        //console.log(result);
+        //const result = 
+        // const listAll = await collection.find().toArray();
+        // console.log(listAll);
+    } catch (error){
+        console.log(error)
+    }
+};
+
 //from npm mongodb documentation
 // const updateResult = await collection.updateOne({ a: 3 }, { $set: { b: 1 } });
 // console.log('Updated documents =>', updateResult);
