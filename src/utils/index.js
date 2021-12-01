@@ -17,3 +17,18 @@ exports.listMovies = async (collection) => {
         console.log(error);
     }
 };
+
+//update a record
+exports.updateMovie = async (collection, dataObj) => {
+    try{
+        await collection.updateOne({'title': dataObj.oldtitle},{ $set: {'title': dataObj.newtitle} })
+        const listAll = await collection.find().toArray();
+        console.log(listAll);
+    } catch (error){
+        console.log(error);
+    }
+};
+
+//from npm mongodb documentation
+// const updateResult = await collection.updateOne({ a: 3 }, { $set: { b: 1 } });
+// console.log('Updated documents =>', updateResult);
