@@ -48,17 +48,8 @@ exports.search = async (collection, dataObj) => {
     try{
         // const result = await collection.find({'title': dataObj}).toArray();
         // console.log(result)
-        const result = await collection.find( { $or: [ { 'title': dataObj }, { 'actor': dataObj }, { 'rating': dataObj} ] } ).toArray();
-        console.log(result)
-        //await collection.find({'title': dataObj.title}).toArray(result);
-        // const result =[];
-        // const searchTitle = {title: dataObj};
-        // await collection.find(searchTitle).toArray(result);
-        // console.log(result);
-        //console.log(result);
-        //const result = 
-        // const listAll = await collection.find().toArray();
-        // console.log(listAll);
+        const result = await collection.find( { $or: [ { 'title': dataObj }, { 'actor': dataObj }, { 'genre': dataObj}, { 'rating': dataObj} ] } ).toArray();
+        console.log(result);
     } catch (error){
         console.log(error)
     }
