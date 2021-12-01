@@ -43,10 +43,12 @@ exports.deleteMovie = async (collection, dataObj) => {
     }
 };
 
-//search
+//search all fields, works
 exports.search = async (collection, dataObj) => {
     try{
-        const result = await collection.find({'title': dataObj}).toArray();
+        // const result = await collection.find({'title': dataObj}).toArray();
+        // console.log(result)
+        const result = await collection.find( { $or: [ { 'title': dataObj }, { 'actor': dataObj }, { 'rating': dataObj} ] } ).toArray();
         console.log(result)
         //await collection.find({'title': dataObj.title}).toArray(result);
         // const result =[];
