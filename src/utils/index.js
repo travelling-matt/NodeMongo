@@ -1,5 +1,7 @@
 //create Fns to add movie and list movie
 //use 'exports.' so that you don't have to module exports at the end of the file. it is also neater and shorter.
+
+//add a movie
 exports.addMovie = async (collection, dataObj) => {
     try{
         await collection.insertOne(dataObj)

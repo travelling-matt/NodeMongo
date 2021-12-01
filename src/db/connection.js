@@ -16,7 +16,7 @@ const client = new MongoClient(process.env.MONGO_URI)
 //create db
 //create collection
 //wait and create movie
-exports.connection = async (crudFunc, dataObj) => {
+const connection = async (crudFunc, dataObj) => {
     try {
         await client.connect();
         console.log("connection succesful")
@@ -31,3 +31,5 @@ exports.connection = async (crudFunc, dataObj) => {
         console.log(error);
     }
 };
+
+module.exports = connection;
