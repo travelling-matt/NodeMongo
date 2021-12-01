@@ -31,6 +31,17 @@ exports.updateMovie = async (collection, dataObj) => {
     }
 };
 
+//delete a record
+exports.deleteMovie = async (collection, dataObj) => {
+    try{
+        await collection.deleteOne({'title': dataObj.title})
+        const listAll = await collection.find().toArray();
+        console.log(listAll);
+    } catch (error){
+        console.log(error)
+    }
+};
+
 //from npm mongodb documentation
 // const updateResult = await collection.updateOne({ a: 3 }, { $set: { b: 1 } });
 // console.log('Updated documents =>', updateResult);
