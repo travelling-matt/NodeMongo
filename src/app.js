@@ -1,6 +1,6 @@
 //pull in connection file and modules from index.js
 const connection = require("./db/connection");
-const { addMovie, listMovies, updateMovie, deleteMovie, search } = require("./utils");
+const { addMovie, listMovies, updateMovie, deleteMovie, search, updateName } = require("./utils");
 //set up yargs 'npm i yargs' in parent folder and line below
 const yargs = require ("yargs");
 //instead of using "add" etc in code below
@@ -36,6 +36,12 @@ const app = async () => {
             newtitle: yargs.argv.newtitle
         };
         await connection(updateMovie, currentMovie);
+    } else if (command === "update name"){
+        const replaceName = {
+            oldName: yargs.argv.oldName,
+            newName: yargs.argv.newName,
+        };
+        await connection(updateName, replaceName);
     } else if (command === "list"){
         await connection(listMovies);
     } else if (command === "delete movie"){

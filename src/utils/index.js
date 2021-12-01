@@ -31,6 +31,17 @@ exports.updateMovie = async (collection, dataObj) => {
     }
 };
 
+//update many records. in this case update an actors name e.g. Elliot Page
+exports.updateName = async (collection, dataObj) => {
+    try{
+        await collection.updateMany({ 'actor': dataObj.oldName }, { $set: {'actor': dataObj.newName}});
+        const listAll = await collection.find().toArray();
+        console.log(listAll);
+    } catch (error){
+        console.log(error);
+    }
+};
+
 //delete a record and output remaining records to console
 exports.deleteMovie = async (collection, dataObj) => {
     try{
@@ -43,7 +54,7 @@ exports.deleteMovie = async (collection, dataObj) => {
     }
 };
 
-//search all fields, works
+//search all fields
 exports.search = async (collection, dataObj) => {
     try{
         // const result = await collection.find({'title': dataObj}).toArray();
