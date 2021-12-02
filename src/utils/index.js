@@ -42,6 +42,33 @@ exports.updateName = async (collection, dataObj) => {
     }
 };
 
+//update many records. with variable for key and value of key pair.
+//e.g.
+//node src/app.js "update variable" --currentKey 'actor' --currentValue "Andrea Garfield" --newKey 'actor' --newValue "Andrew Garfield"
+exports.updateByVariable = async (collection, dataObj) => {
+    try{
+        const listAll = await collection.find().toArray();
+        console.log("original list", listAll);
+        await collection.updateMany({ [dataObj.currentKey]: dataObj.currentValue }, { $set: { [dataObj.newKey]: dataObj.newValue }});
+        const listAllUpdated = await collection.find().toArray();
+        console.log("updated list", listAllUpdated);
+    } catch (error){
+        console.log(error);
+    }
+};
+
+// //find one and update or create document
+// //errors, 'requires atomic operators'
+// exports.findAndUpdate = async (collection, dataObj) => {
+//     try{
+//         await collection.findOneAndUpdate({ 'title': dataObj.title }, { $set 'title': dataObj.updateTitle, 'actor': dataObj.updateActor, 'genre': dataObj.updateGenre, 'rating': dataObj.updateRating }, { upsert: true });
+//         const listAll = await collection.find().toArray();
+//         console.log(listAll);
+//     } catch (error){
+//         console.log(error);
+//     }
+// };
+
 //delete a record and output remaining records to console
 exports.deleteMovie = async (collection, dataObj) => {
     try{
@@ -65,6 +92,8 @@ exports.search = async (collection, dataObj) => {
         console.log(error)
     }
 };
+
+
 
 //from npm mongodb documentation
 // const updateResult = await collection.updateOne({ a: 3 }, { $set: { b: 1 } });

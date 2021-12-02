@@ -1,6 +1,6 @@
 //pull in connection file and modules from index.js
 const connection = require("./db/connection");
-const { addMovie, listMovies, updateMovie, deleteMovie, search, updateName } = require("./utils");
+const { addMovie, listMovies, updateMovie, deleteMovie, search, updateName, updateByVariable } = require("./utils");
 //set up yargs 'npm i yargs' in parent folder and line below
 const yargs = require ("yargs");
 //instead of using "add" etc in code below
@@ -30,6 +30,8 @@ const app = async () => {
         };
         await connection(addMovie, newMovie1);
         await connection(addMovie, newMovie2);
+    } else if (command === "list"){
+        await connection(listMovies);
     } else if (command === "update movie"){
         const currentMovie = {
             oldtitle: yargs.argv.oldtitle,
@@ -42,9 +44,31 @@ const app = async () => {
             newName: yargs.argv.newName,
         };
         await connection(updateName, replaceName);
-    } else if (command === "list"){
-        await connection(listMovies);
-    } else if (command === "delete movie"){
+    } 
+
+    else if (command === "update variable"){
+        const updatePair = {
+            currentKey: yargs.argv.currentKey,
+            currentValue: yargs.argv.currentValue,
+            newKey: yargs.argv.newKey,
+            newValue: yargs.argv.newValue,
+        };
+        await connection(updateByVariable, updatePair);
+    }
+    
+    // //not working see index.js notes
+    // else if (command === "find and update"){
+    //     const updateOrAddMovie = {
+    //         title: yargs.argv.title,
+    //         updateTitle: yargs.argv.updateTitle,
+    //         updateActor: yargs.argv.updateActor,
+    //         updateGenre: yargs.argv.updateGenre,
+    //         updateRating: yargs.argv.updateRating 
+    //     };
+    //     await connection(findAndUpdate, updateOrAddMovie);
+    // } 
+    
+    else if (command === "delete movie"){
         const newDelete = {
             title: yargs.argv.title,
         };
